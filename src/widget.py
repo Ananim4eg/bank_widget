@@ -1,17 +1,15 @@
 from datetime import datetime
 
-import masks
-
+from masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(card_or_account_info: str) -> str:
     """Функция маскирующая номера карты или счета"""
-    card_or_account_list = card_or_account_info.rsplit(maxsplit=1)
-    
+    card_or_account_list: list[str] = card_or_account_info.rsplit(maxsplit=1)
     if len(card_or_account_list[1]) == 16:
-        return card_or_account_list[0] + " " + masks.get_mask_card_number(int(card_or_account_list[1]))
+        return f"{card_or_account_list[0]} {get_mask_card_number(int(card_or_account_list[1]))}"
     else:
-        return card_or_account_list[0] + " " + masks.get_mask_account(int(card_or_account_list[1]))
+        return f"{card_or_account_list[0]} {get_mask_account(int(card_or_account_list[1]))}"
 
 
 def get_date(date: str) -> str:
@@ -19,4 +17,3 @@ def get_date(date: str) -> str:
     format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
 
     return format_date.strftime("%d.%m.%Y")
-
