@@ -12,7 +12,10 @@ def filter_by_state(my_list: List[dict], filter_parameter: str='EXECUTED') -> Li
     return new_list
 
 
-def sort_by_date(my_list: List[dict], reverse=False) -> List[dict]:
-    new_list = []
+def sort_by_date(my_list: List[dict], reverse_state=True) -> List[dict]:
+    """Функция сортирует список со словарями по ключу data"""
+
+    new_list = sorted(my_list, key=lambda x: x["date"], reverse=reverse_state)
+
 
     return new_list
