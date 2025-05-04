@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(card_or_account_info: str) -> str:
@@ -43,5 +43,3 @@ def get_date(date: str) -> str:
 
     except TypeError:
         return "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
-
-

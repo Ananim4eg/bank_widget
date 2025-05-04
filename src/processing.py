@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Union
 
 
 def filter_by_state(my_list: List[dict], filter_parameter: str = "EXECUTED") -> List[dict]:
@@ -13,9 +13,9 @@ def filter_by_state(my_list: List[dict], filter_parameter: str = "EXECUTED") -> 
     return new_list
 
 
-def sort_by_date(my_list: List[dict], reverse_state: bool = True) -> List[dict] or str:
+def sort_by_date(my_list: List[dict], reverse_state: bool = True) -> Union[List[dict], str]:
     """Функция сортирует список со словарями по ключу data"""
-    if reverse_state != True and reverse_state != False:
+    if not isinstance(reverse_state, bool):
         reverse_state = True
     try:
         for dick_with_date in my_list:

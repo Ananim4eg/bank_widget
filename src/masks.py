@@ -5,6 +5,7 @@ def get_mask_card_number(number_card: int) -> str:
     else:
         return "Неверный формат, введенных, данных"
 
+
 def get_mask_account(number_account: int) -> str:
     """Маскирует номер счета"""
     if len(str(number_account)) == 20:
