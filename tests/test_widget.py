@@ -1,26 +1,6 @@
 import pytest
 
-from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
-from src.processing import filter_by_state, sort_by_date
-
-
-@pytest.fixture()
-def my_card_number():
-    return 7000792289606361
-
-
-@pytest.fixture()
-def my_account_number():
-    return 73654108430135874305
-
-
-def test_mask_card(my_card_number):
-    assert get_mask_card_number(my_card_number) == "7000 79** **** 6361"
-
-
-def test_mask_account(my_account_number):
-    assert  get_mask_account(my_account_number) == "**4305"
 
 
 @pytest.mark.parametrize("my_string, result_of_masking", [
@@ -44,6 +24,24 @@ def test_mask_account(my_account_number):
     ("WTF 35383033474447895560", "Неверный формат, введенных, данных"),
 
 ])
+
+
 def test_mask_account_card(my_string, result_of_masking):
     assert mask_account_card(my_string) == result_of_masking
 
+
+@pytest.fixture()
+def my_date():
+        return "2024-03-11T02:26:18.671407"
+
+
+def test_get_date(my_date):
+    assert get_date(my_date) == "11.03.2024"
+
+    assert get_date("") == "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
+
+    assert get_date(123) == "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
+
+    assert get_date("123") == "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
+
+    assert get_date("20234-03-11T02:26:18.671407") == "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"

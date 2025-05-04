@@ -33,6 +33,15 @@ def mask_account_card(card_or_account_info: str) -> str:
 
 def get_date(date: str) -> str:
     """Приводит строку с датой к формату 'ДД.ММ.ГГГГ'"""
-    format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+    try:
 
-    return format_date.strftime("%d.%m.%Y")
+        format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+        return format_date.strftime("%d.%m.%Y")
+
+    except ValueError:
+        return "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
+
+    except TypeError:
+        return "Дата должна быть введена в формате <ГГГГ-ММ-ДДTЧЧ:мм:СС.сссссс>"
+
+
