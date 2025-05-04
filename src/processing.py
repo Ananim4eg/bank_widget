@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 
@@ -12,9 +13,17 @@ def filter_by_state(my_list: List[dict], filter_parameter: str = "EXECUTED") -> 
     return new_list
 
 
-def sort_by_date(my_list: List[dict], reverse_state: bool = True) -> List[dict]:
+def sort_by_date(my_list: List[dict], reverse_state: bool = True) -> List[dict] or str:
     """Функция сортирует список со словарями по ключу data"""
+    if reverse_state != True and reverse_state != False:
+        reverse_state = True
+    try:
+        for dick_with_date in my_list:
+            datetime.strptime(dick_with_date["date"], "%Y-%m-%dT%H:%M:%S.%f")
 
-    new_list = sorted(my_list, key=lambda x: x["date"], reverse=reverse_state)
+        new_list = sorted(my_list, key=lambda x: x["date"], reverse=reverse_state)
+        return new_list
 
-    return new_list
+    except ValueError:
+
+        return "Один или несколько словарей содержат дату в неправильном формате"
