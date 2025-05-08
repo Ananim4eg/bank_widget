@@ -1,11 +1,12 @@
+from typing import List
+
 import pytest
 
 from src.generators import card_number_generator, transaction_descriptions, filter_by_currency
 
 @pytest.fixture()
-def my_transactions() -> list:
-    return \
-        [
+def my_transactions() -> List[dict]:
+    return [
         {
               "id": 939719570,
               "state": "EXECUTED",
@@ -73,7 +74,7 @@ def my_transactions() -> list:
             "operationAmount": {
                 "amount": "2500.00",
                 "currency": {
-                    "name": "RUB",
+                    "name": "руб.",
                     "code": "RUB"
                 }
             },
@@ -92,7 +93,7 @@ def my_transactions() -> list:
                     "code": "EUR"
                 }
             },
-            "description": "Перевод с карты на кару",
+            "description": "Перевод с карты на карту",
             "from": "Visa Gold 5999414228426353",
             "to": "Visa Platinum 8990922113665229"
         }
@@ -107,7 +108,7 @@ def test_filter_by_currency(my_transactions):
             "operationAmount": {
                 "amount": "2500.00",
                 "currency": {
-                    "name": "RUB",
+                    "name": "руб.",
                     "code": "RUB"
                 }
             },
@@ -124,5 +125,19 @@ def test_filter_by_currency(my_transactions):
 
     assert list(filter_by_currency([], " ")) == []
 
+executed = [
+            ["Перевод организации",
+            "Перевод со счета на счет",
+            "Перевод организации",
+            "Перевод со счета на счет",
+            "Перевод с карты на карту",
+            "Перевод с карты на карту"
+            ],[]
+           ]
+@pytest.mark.parametrize("my_transactions", executed, indirect=True)
+def test_transaction_descriptions(my_transactions):
+    assert list(transaction_descriptions(my_transactions)) == executed[0]
 
-# @pytest.mark.parametrize("my_list, executed", [my_transactions, ])
+    assert list(transaction_descriptions([])) == executed[1]
+
+    assert list(transaction_descriptions(list(my_transactions)[1:3])) == executed[0][1:3]
