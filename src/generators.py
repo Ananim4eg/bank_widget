@@ -97,15 +97,20 @@ transactions =\
 
 
 def filter_by_currency(my_list: List[dict], my_currency: str) -> iter:
-    """Возвращает итератор содержащий словари с информацией о транзакциях"""
+    """Возвращает итератор, содержащий словари с информацией о транзакциях"""
     return (trans for trans in my_list if trans["operationAmount"]['currency']["name"] == my_currency)
 
 
 def transaction_descriptions(my_list: List[dict]) -> iter:
-    """Возвращает итератор содержащий описание транзакции. Например:'Перевод с карты на карту'"""
+    """Возвращает итератор, содержащий описание транзакции. Например:'Перевод с карты на карту'"""
     return (trans["description"] for trans in my_list)
 
 
-def card_number_generator(start: int, stop: int) -> str:
-    pass
-
+def card_number_generator(start: int, stop: int) -> iter:
+    """Возвращает итератор, содержащий номера карт"""
+    pattern = 10000000000000000
+    result_list = []
+    for i in range(start, stop + 1):
+        result_number_card = str(pattern + i)[1:]
+        result_list.append(f"{result_number_card[:4]} {result_number_card[4:8]} {result_number_card[8:12]} {result_number_card[12:]}")
+    return result_list
