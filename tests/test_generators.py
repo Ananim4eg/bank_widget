@@ -134,10 +134,62 @@ executed = [
             "Перевод с карты на карту"
             ],[]
            ]
-@pytest.mark.parametrize("my_transactions", executed, indirect=True)
-def test_transaction_descriptions(my_transactions):
-    assert list(transaction_descriptions(my_transactions)) == executed[0]
+@pytest.mark.parametrize("my_transactions, executed",[
+    (my_transactions,
+      [
+          "Перевод организации",
+          "Перевод со счета на счет",
+          "Перевод организации",
+          "Перевод со счета на счет",
+          "Перевод с карты на карту",
+          "Перевод с карты на карту"
+      ]
+    )
+    ], indirect=["my_transactions"])
+def test_transaction_descriptions(my_transactions, executed):
+    assert list(transaction_descriptions(my_transactions[1:3])) == executed[1:3]
 
-    assert list(transaction_descriptions([])) == executed[1]
+    assert list(transaction_descriptions([])) == []
 
-    assert list(transaction_descriptions(list(my_transactions)[1:3])) == executed[0][1:3]
+    assert list(transaction_descriptions(list(my_transactions))) == executed
+
+
+@pytest.mark.parametrize("start, stop, executed", [
+    (10,15,[
+            "0000 0000 0000 0010",
+            "0000 0000 0000 0011",
+            "0000 0000 0000 0012",
+            "0000 0000 0000 0013",
+            "0000 0000 0000 0014",
+            "0000 0000 0000 0015"
+            ]
+    ),
+    (0,5,[
+            "0000 0000 0000 0000",
+            "0000 0000 0000 0001",
+            "0000 0000 0000 0002",
+            "0000 0000 0000 0003",
+            "0000 0000 0000 0004",
+            "0000 0000 0000 0005"
+            ]
+    ),
+    (9999999999999995,9999999999999999,[
+            "9999 9999 9999 9995",
+            "9999 9999 9999 9996",
+            "9999 9999 9999 9997",
+            "9999 9999 9999 9998",
+            "9999 9999 9999 9999",
+            ]
+    ),
+    (-5,6,"Некорректные диапазоны"
+    ),
+    (9999999999999995,99999999999999999,'Некорректные диапазоны'
+    ),
+    (15,10,[]
+    )
+])
+def test_card_number_generator(start, stop, executed):
+    assert card_number_generator(start, stop) == executed
+
+
+

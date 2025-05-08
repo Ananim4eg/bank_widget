@@ -93,6 +93,8 @@ def transaction_descriptions(my_list: List[dict]) -> iter:
 
 def card_number_generator(start: int, stop: int) -> iter:
     """Возвращает итератор, содержащий номера карт"""
+    if (start < 0 or stop < 0 ) or (start > 9999999999999999 or stop > 9999999999999999):
+        return "Некорректные диапазоны"
     pattern = 10000000000000000
     result_list = []
     for i in range(start, stop + 1):
