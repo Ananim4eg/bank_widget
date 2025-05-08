@@ -2,103 +2,88 @@ from typing import List
 
 
 transactions =\
-    [
-        {
-              "id": 939719570,
-              "state": "EXECUTED",
-              "date": "2018-06-30T02:08:58.425572",
-              "operationAmount": {
-                  "amount": "9824.07",
-                  "currency": {
-                      "name": "USD",
-                      "code": "USD"
-                  }
-              },
-              "description": "Перевод организации",
-              "from": "Счет 75106830613657916952",
-              "to": "Счет 11776614605963066702"
-        },
-        {
-            "id": 142264268,
-            "state": "EXECUTED",
-            "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {
-                "amount": "79114.93",
-                "currency": {
-                    "name": "USD",
-                    "code": "USD"
-                }
+        [
+            {
+                "id": 939719570,
+                "state": "EXECUTED",
+                "date": "2018-06-30T02:08:58.425572",
+                "operationAmount": {
+                    "amount": "9824.07",
+                    "currency": {
+                        "name": "USD",
+                        "code": "USD"
+                    }
+                },
+                "description": "Перевод организации",
+                "from": "Счет 75106830613657916952",
+                "to": "Счет 11776614605963066702"
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
-        },
-        {
-            "id": 153764598,
-            "state": "EXECUTED",
-            "date": "2017-12-05T21:20:15.184932",
-            "operationAmount": {
-                "amount": "4563.56",
-                "currency": {
-                    "name": "EUR",
-                    "code": "EUR"
-                }
+            {
+                "id": 142264268,
+                "state": "EXECUTED",
+                "date": "2019-04-04T23:20:05.206878",
+                "operationAmount": {
+                    "amount": "79114.93",
+                    "currency": {
+                        "name": "USD",
+                        "code": "USD"
+                    }
+                },
+                "description": "Перевод со счета на счет",
+                "from": "Счет 19708645243227258542",
+                "to": "Счет 75651667383060284188"
             },
-            "description": "Перевод организации",
-            "from": "Счет 64686473678894779589",
-            "to": "Счет 75651664879060286425"
-        },
-        {
-            "id": 427386633,
-            "state": "EXECUTED",
-            "date": "2019-06-12T15:22:13.143563",
-            "operationAmount": {
-                "amount": "34385.12",
-                "currency": {
-                    "name": "USD",
-                    "code": "USD"
-                }
+            {
+                "id": 873106923,
+                "state": "EXECUTED",
+                "date": "2019-03-23T01:09:46.296404",
+                "operationAmount": {
+                    "amount": "43318.34",
+                    "currency": {
+                        "name": "руб.",
+                        "code": "RUB"
+                    }
+                },
+                "description": "Перевод со счета на счет",
+                "from": "Счет 44812258784861134719",
+                "to": "Счет 74489636417521191160"
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 73654108430135874305",
-            "to": "Счет 35383033474447895560"
-        },
-        {
-            "id": 155498340,
-            "state": "EXECUTED",
-            "date": "2020-01-03T04:23:45.216345",
-            "operationAmount": {
-                "amount": "2500.00",
-                "currency": {
-                    "name": "RUB",
-                    "code": "RUB"
-                }
+            {
+                "id": 895315941,
+                "state": "EXECUTED",
+                "date": "2018-08-19T04:27:37.904916",
+                "operationAmount": {
+                    "amount": "56883.54",
+                    "currency": {
+                        "name": "USD",
+                        "code": "USD"
+                    }
+                },
+                "description": "Перевод с карты на карту",
+                "from": "Visa Classic 6831982476737658",
+                "to": "Visa Platinum 8990922113665229"
             },
-            "description": "Перевод с карты на карту",
-            "from": "MasterCard 7158300734726758",
-            "to": "Visa Classic 6831982476737658"
-        },
-        {
-            "id": 843957626,
-            "state": "EXECUTED",
-            "date": "2019-02-02T12:20:34.543163",
-            "operationAmount": {
-                "amount": "345.16",
-                "currency": {
-                    "name": "EUR",
-                    "code": "EUR"
-                }
-            },
-            "description": "Перевод с карты на кару",
-            "from": "Visa Gold 5999414228426353",
-            "to": "Visa Platinum 8990922113665229"
-        }
-    ]
+            {
+                "id": 594226727,
+                "state": "CANCELED",
+                "date": "2018-09-12T21:27:25.241689",
+                "operationAmount": {
+                    "amount": "67314.70",
+                    "currency": {
+                        "name": "руб.",
+                        "code": "RUB"
+                    }
+                },
+                "description": "Перевод организации",
+                "from": "Visa Platinum 1246377376343588",
+                "to": "Счет 14211924144426031657"
+            }
+        ]
 
 
 def filter_by_currency(my_list: List[dict], my_currency: str) -> iter:
     """Возвращает итератор, содержащий словари с информацией о транзакциях"""
-    return (trans for trans in my_list if trans["operationAmount"]['currency']["name"] == my_currency)
+    return (trans for trans in my_list if trans["operationAmount"]['currency']["code"] == my_currency)
 
 
 def transaction_descriptions(my_list: List[dict]) -> iter:
