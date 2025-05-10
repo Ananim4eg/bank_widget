@@ -1,2 +1,36 @@
+время запуска программы - 2025-05-11 01:17:28.502406
+write_log_in_fail_positive_example ok
 
+время запуска программы - 2025-05-11 01:17:35.223761
+write_log_in_fail_positive_example ok
+
+время запуска программы - 2025-05-11 01:21:55.716976
+write_log_in_file_positive_example ok
+
+время запуска программы - 2025-05-11 01:21:55.716976
+write_log_in_file_fail_example error: An error occurred during execution. Input: (), {}
+
+время запуска программы - 2025-05-11 01:22:35.226814
+write_log_in_file_positive_example ok
+
+время запуска программы - 2025-05-11 01:22:35.226814
+write_log_in_file_fail_example error: An error occurred during execution. Input: (), {}
+
+время запуска программы - 2025-05-11 01:23:32.704886
+write_log_in_file_positive_example ok
+
+время запуска программы - 2025-05-11 01:23:32.704886
+write_log_in_file_fail_example error: An error occurred during execution. Input: (), {}
+
+время запуска программы - 2025-05-11 01:24:01.676967
+write_log_in_file_positive_example ok
+
+время запуска программы - 2025-05-11 01:24:01.676967
+write_log_in_file_fail_example error: An error occurred during execution. Input: (), {}
+
+время запуска программы - 2025-05-11 01:25:51.796738
+write_log_in_file_positive_example ok
+
+время запуска программы - 2025-05-11 01:25:51.796738
+write_log_in_file_fail_example error: An error occurred during execution. Input: (2, 7), {}
 
