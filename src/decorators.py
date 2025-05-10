@@ -1,26 +1,35 @@
-from time import time
+from datetime import datetime
 from functools import wraps
+from os import getcwd
+from typing import Any, Callable
 
 
-def decorator_with_args(filename: str = " "):
-    def log(func):
+def decorator_with_args(filename: str = " ") -> Any:
+    def log(func: Callable) -> Any:
         @wraps(func)
-        def wrapper(*args, **kwargs):
-            start_time = time()
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            start_time = datetime.now()
             try:
                 result = func(*args, **kwargs)
+                if filename != " ":
+                    with open(f"{getcwd()[:-3] + filename}", "a", encoding="UTF-8") as file:
+                        file.write(f"время запуска программы - {start_time}\n{func.__name__} ok\n\n")
                 return result
             except Exception as e:
-                return f"Ошибка {e}"
+                if filename != " ":
+                    with open(f"{getcwd()[:-3] + filename}", "a", encoding="UTF-8") as file:
+                        file.write(
+                            f"время запуска программы - {start_time}\n"
+                            f"{func.__name__} error: {e}. Input: {args}, {kwargs}\n\n"
+                        )
+                    return None
+                else:
+                    return f"Ошибка {e}"
             finally:
-                stop_time = time()
+                stop_time = datetime.now()
                 working_time = stop_time - start_time
+                print(f"Время работы программы: {working_time}")
+
         return wrapper
+
     return log
-
-@decorator_with_args("1")
-def example(a, b):
-    return a * b
-
-
-print(example("2", "2"))
