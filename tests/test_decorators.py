@@ -1,11 +1,11 @@
 from typing import Any
 
-from src.decorators import decorator_with_args
+from src.decorators import log
 
 
-def test_decorator_with_args(capsys: Any) -> None:
+def test_log(capsys: Any) -> None:
 
-    @decorator_with_args(" ")
+    @log(" ")
     def positive_example() -> str:
         return "Hello world"
 
@@ -14,7 +14,7 @@ def test_decorator_with_args(capsys: Any) -> None:
     captured = capsys.readouterr()
     assert captured.out == "Hello world\n"
 
-    @decorator_with_args()
+    @log()
     def err_example() -> None:
         raise ValueError("Error this operation")
 
@@ -24,13 +24,13 @@ def test_decorator_with_args(capsys: Any) -> None:
     assert out == ""
     assert err == "Ошибка Error this operation\n"
 
-    @decorator_with_args("mylog.txt")
+    @log("mylog.txt")
     def write_log_in_file_positive_example(a: int, b: int) -> int:
         return a * b
 
     assert write_log_in_file_positive_example(2, 3) == 6
 
-    @decorator_with_args("mylog.txt")
+    @log("mylog.txt")
     def write_log_in_file_fail_example(a: int, b: int) -> int:
         if not (a * b):
             return a * b
