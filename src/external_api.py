@@ -29,4 +29,3 @@ def conversion_currency(transaction: dict) -> float | str:
             return "Что-то пошло не так"
 
     return amount
-

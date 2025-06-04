@@ -1,4 +1,4 @@
-from json import load, JSONDecodeError
+from json import JSONDecodeError, load
 
 
 def read_file_json(path_file: str) -> list:
