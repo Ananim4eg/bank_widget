@@ -26,7 +26,3 @@ def read_file_json(path_file: str) -> list:
 
     except FileNotFoundError:
         return []
-
-
-if __name__ == "__main__":
-    print(read_file_json(os.path.join(Path(os.path.dirname(__file__)).parent, "data", "operations.json")))
