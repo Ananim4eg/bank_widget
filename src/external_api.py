@@ -4,7 +4,7 @@ import requests
 from dotenv import load_dotenv
 
 
-def conversion_currency(transaction: dict) -> float:
+def conversion_currency(transaction: dict) -> float | str:
     """
     Получает на вход словарь с данными о транзакции.
     Конвертирует валюту из USD и EUR в RUB и возвращает сумму транзакции в рублях
@@ -17,13 +17,16 @@ def conversion_currency(transaction: dict) -> float:
     if currency in ["USD", "EUR"]:
 
         url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount}"
-
         headers = {"apikey": os.getenv("API_KEY")}
+        response = requests.get(url, headers=headers)
 
-        response = requests.get(url, headers=headers).json()
+        result: float = response.json()["result"]
 
-        result: float = response["result"]
         if response.status_code == 200:
             return result
 
+        else:
+            return "Что-то пошло не так"
+
     return amount
+
