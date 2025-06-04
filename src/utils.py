@@ -1,6 +1,4 @@
-import os
 from json import load, JSONDecodeError
-from pathlib import Path
 
 
 def read_file_json(path_file: str) -> list:
