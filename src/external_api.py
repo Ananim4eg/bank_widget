@@ -23,11 +23,9 @@ def conversion_currency(transaction: dict) -> float | str:
         result: float = response.json()["result"]
 
         if response.status_code == 200:
-            raise Exception(
-                "Что-то пошло не так"
-            )
+            return result
 
         else:
-            return "Что-то пошло не так"
+            raise Exception("Что-то пошло не так")
 
     return amount
