@@ -1,7 +1,6 @@
 import logging
 import os
 
-
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'masks.log')
 
 logger = logging.getLogger(__name__)
