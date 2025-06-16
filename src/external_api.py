@@ -26,6 +26,6 @@ def conversion_currency(transaction: dict) -> float | str:
             return result
 
         else:
-            raise Exception("Что-то пошло не так")
+            return "Что-то пошло не так"
 
     return amount
