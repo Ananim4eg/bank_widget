@@ -9,7 +9,6 @@ def read_csv_file(path_file: str) -> list[dict] | str:
     try:
         with open(path_file, encoding='utf-8') as csv_file:
             result = csv.DictReader(csv_file, delimiter=';')
-            next(result)
 
             return [row for row in result]
 
