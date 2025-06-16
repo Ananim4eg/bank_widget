@@ -10,3 +10,11 @@ def read_csv_file(path_file: str) -> list[dict]:
         next(result)
 
         return [row for row in result]
+
+
+def read_xlsx_file(path_file: str) -> list[dict]:
+    """Считывает xlsx файл и возвращает список словарей с транзакциями"""
+
+    excel_data = pd.read_excel(path_file)
+
+    return list(excel_data.to_dict(orient='records'))
