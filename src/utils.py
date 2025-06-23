@@ -1,8 +1,9 @@
 import logging
 import os
+import re
 from collections import defaultdict
 from json import JSONDecodeError, load
-import re
+from typing import Any
 
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'utils.log')
 
@@ -56,10 +57,10 @@ def process_bank_search(data: list[dict], search_data: str) -> list[dict]:
     return result
 
 
-def process_bank_operations(data: list[dict], categories: list)-> dict:
+def process_bank_operations(data: list[dict], categories: list) -> dict:
     """Подсчитывает кол-во операции по заданным категориям"""
 
-    count_operations = defaultdict(int)
+    count_operations: defaultdict[Any, int] = defaultdict(int)
 
     for operations in data:
         if operations['description'] in categories:
