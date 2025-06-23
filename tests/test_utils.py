@@ -1,7 +1,7 @@
 from json import loads
 from unittest.mock import patch, mock_open
 
-from src.utils import read_file_json, process_bank_search
+from src.utils import read_file_json, process_bank_search, process_bank_operations
 
 test_data = """[{
     "id": 441945886,
@@ -153,3 +153,18 @@ def test_process_bank_search_missing_request():
 
 def test_process_bank_search_empty_request():
     assert process_bank_search(test_list, '') == test_list
+
+
+def test_process_bank_operations():
+    assert (process_bank_operations(test_list,
+["Открытие вклада", "Перевод с карты на счет"]) == {'Открытие вклада': 1, 'Перевод с карты на счет': 2})
+
+
+def test_process_bank_operations_empty_list():
+    assert process_bank_operations(test_list, []) == {}
+
+
+def test_process_bank_operations_missing_request():
+    assert process_bank_operations(test_list, ['test']) == {}
+
+
