@@ -1,5 +1,6 @@
 import logging
 import os
+from collections import defaultdict
 from json import JSONDecodeError, load
 import re
 
@@ -52,5 +53,16 @@ def process_bank_search(data: list[dict], search_data: str) -> list[dict]:
         if re.search(search_data, operation['description'], flags=re.IGNORECASE):
             result.append(operation)
 
-
     return result
+
+
+def process_bank_operations(data: list[dict], categories: list)-> dict:
+    """Подсчитывает кол-во операции по заданным категориям"""
+
+    count_operations = defaultdict(int)
+
+    for operations in data:
+        if operations['description'] in categories:
+            count_operations[f'{operations["description"]}'] += 1
+
+    return dict(count_operations)
