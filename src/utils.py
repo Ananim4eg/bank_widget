@@ -1,6 +1,7 @@
 import logging
 import os
 from json import JSONDecodeError, load
+import re
 
 log_path = os.path.join(os.path.dirname(__file__), '..', 'logs', 'utils.log')
 
@@ -40,3 +41,16 @@ def read_file_json(path_file: str) -> list:
     except FileNotFoundError:
         logger.error("файл не найден")
         return []
+
+
+def process_bank_search(data: list[dict], search_data: str) -> list[dict]:
+    """Ищет операции в описании которых есть заданная для поиска строка"""
+
+    result = []
+
+    for operation in data:
+        if re.search(search_data, operation['description'], flags=re.IGNORECASE):
+            result.append(operation)
+
+
+    return result
