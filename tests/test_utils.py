@@ -156,8 +156,10 @@ def test_process_bank_search_empty_request():
 
 
 def test_process_bank_operations():
-    assert (process_bank_operations(test_list,
-["Открытие вклада", "Перевод с карты на счет"]) == {'Открытие вклада': 1, 'Перевод с карты на счет': 2})
+    assert (process_bank_operations(test_list,["Открытие вклада", "Перевод с карты на счет"]) == {
+        'Открытие вклада': 1,
+        'Перевод с карты на счет': 2
+    })
 
 
 def test_process_bank_operations_empty_list():

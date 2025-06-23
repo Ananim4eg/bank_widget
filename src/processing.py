@@ -7,7 +7,7 @@ def filter_by_state(my_list: List[dict], filter_parameter: str = "EXECUTED") -> 
     new_list = []
 
     for elem in my_list:
-        if elem["state"] == filter_parameter:
+        if elem.get("state") == filter_parameter:
             new_list.append(elem)
 
     return new_list
@@ -17,10 +17,8 @@ def sort_by_date(my_list: List[dict], reverse_state: bool = True) -> Union[List[
     """Функция сортирует список со словарями по ключу data"""
     if not isinstance(reverse_state, bool):
         reverse_state = True
-    try:
-        for dick_with_date in my_list:
-            datetime.strptime(dick_with_date["date"], "%Y-%m-%dT%H:%M:%S.%f")
 
+    try:
         new_list = sorted(my_list, key=lambda x: x["date"], reverse=reverse_state)
         return new_list
 
