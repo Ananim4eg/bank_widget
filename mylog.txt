@@ -33,4 +33,3 @@ write_log_in_file_positive_example ok
 
 время запуска программы - 2025-05-11 01:25:51.796738
 write_log_in_file_fail_example error: An error occurred during execution. Input: (2, 7), {}
-

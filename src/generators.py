@@ -1,4 +1,4 @@
-from typing import Any, Generator, Iterable, List
+from typing import Iterable, List
 
 transactions = [
     {
@@ -61,7 +61,7 @@ def transaction_descriptions(my_list: List[dict]) -> Iterable:
         yield i
 
 
-def card_number_generator(start: int, stop: int) -> Generator[str, Any, str | None]:
+def card_number_generator(start: int, stop: int) -> Iterable:
     """Возвращает номера карт, формирующиеся в диапазоне заданных значений"""
     try:
         if (start < 0 or stop < 0) or (start > 9999999999999999 or stop > 9999999999999999):
