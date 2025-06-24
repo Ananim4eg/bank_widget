@@ -1,4 +1,3 @@
-from datetime import datetime
 from functools import wraps
 from os import getcwd
 from os.path import dirname
@@ -7,11 +6,11 @@ from typing import Any, Callable
 
 def log(filename: str = " ") -> Any:
     """Декоратор для логирования работы функций"""
+
     def decorator(func: Callable) -> Any:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             full_path = dirname(getcwd()) + "\\"
-            start_time = datetime.now()
             try:
                 result = func(*args, **kwargs)
                 if filename != " ":
@@ -25,9 +24,6 @@ def log(filename: str = " ") -> Any:
                     return f"Ошибка {e}"
                 else:
                     return f"Ошибка {e}"
-            finally:
-                stop_time = datetime.now()
-                working_time = stop_time - start_time
 
         return wrapper
 
